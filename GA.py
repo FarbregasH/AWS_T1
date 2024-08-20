@@ -3,7 +3,7 @@ import time
 import pandas as pd
 
 # Load the token data from the CSV file
-token_data_path = r"C:\Users\farln\Documents\PycharmProjects\ASTRO-LUNA\Token_Master - GA.csv"
+token_data_path = r"C:\Users\farln\Documents\PycharmProjects\AWS_T1\Token_Master - GA.csv"
 token_df = pd.read_csv(token_data_path)
 
 def fetch_balances(address, token_address):
