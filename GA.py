@@ -6,17 +6,29 @@ import pandas as pd
 token_data_path = r"C:\Users\farln\Documents\PycharmProjects\AWS_T1\Token_Master - GA.csv"
 token_df = pd.read_csv(token_data_path)
 
-def fetch_balances(address, token_address):
+# Enhanced fetch_balances function with retries and delay
+def fetch_balances(address, token_address, retries=3, delay=5):
     url = f"https://lcd-osmosis.keplr.app/cosmos/bank/v1beta1/spendable_balances/{address}"
-    response = requests.get(url)
-    data = response.json()
-    balances = data.get('balances', [])
+    for attempt in range(retries):
+        try:
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+            balances = data.get('balances', [])
 
-    decimals = 6
-    balance_raw = next((item['amount'] for item in balances if item['denom'] == token_address), None)
-    balance = int(balance_raw) / (10 ** decimals) if balance_raw else 0
+            decimals = 6
+            balance_raw = next((item['amount'] for item in balances if item['denom'] == token_address), None)
+            balance = int(balance_raw) / (10 ** decimals) if balance_raw else 0
 
-    return balance
+            return balance
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching balance for {address}: {e}")
+            if attempt < retries - 1:
+                print(f"Retrying in {delay} seconds...")
+                time.sleep(delay)
+            else:
+                print("Max retries exceeded. Returning 0 balance.")
+                return 0
 
 def send_line_notification(token, message):
     url = "https://notify-api.line.me/api/notify"
@@ -129,6 +141,11 @@ osmosis_addresses = [
 line_notify_token = "xBS0AAZouYHV2hJyQEDszjKxb3eoZwf9E4D6vZsRDWO"
 
 compare_balances(osmosis_addresses, line_notify_token)
+
+
+
+
+
 
 
 
