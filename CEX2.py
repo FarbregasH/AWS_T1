@@ -3,7 +3,7 @@ import time
 import pandas as pd
 
 # Load the token data from the CSV file
-token_data_path = r"C:\Users\farln\Documents\PycharmProjects\AWS_T1\Token_Master - CEX2.csv"
+token_data_path = r"/home/ec2-user/AWS_T1/Token_Master_CEX2.csv"  # Update this path to your EC2 instance path
 token_df = pd.read_csv(token_data_path)
 
 # Modified fetch_balances function with retries and delay
