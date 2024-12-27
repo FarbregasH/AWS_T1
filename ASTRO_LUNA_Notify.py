@@ -139,7 +139,9 @@ def compare_balances(neutron_addresses, terra_address, token, interval=1):
 neutron_addresses = [
     ("BOT_ASTRO_LUNA", "neutron1vzvagczrx7xz28g8wvqwettdaeyhgyn6a99774"),
     ("MM_ASTRO", "neutron16a6fuc6ruzmt0vu8gwjwrah3zdgr9wtl0h7lfy"),
-    ("CX_ASTRO", "neutron1k6ue45fjgg8yh63d2hakt5a5hyn8yyvv6539er")
+    ("CX_ASTRO", "neutron1k6ue45fjgg8yh63d2hakt5a5hyn8yyvv6539er"),
+    ("CEX1_ASTRO", "neutron152fwqsla5lxfu3sgy65naf7w2up0za8fps06m7"),
+    ("CEX2_ASTRO", "neutron1k6ue45fjgg8yh63d2hakt5a5hyn8yyvv6539er")
 ]
 terra_address = "terra1y60403dd3wvvpswc8l4hy523lftuyzswlru2xf"
 line_notify_token = "xBS0AAZouYHV2hJyQEDszjKxb3eoZwf9E4D6vZsRDWO"
